@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import List from "./List";
+import { Button } from "reactstrap";
 import "./App.css";
 
 class App extends Component {
@@ -20,6 +21,8 @@ class App extends Component {
     e.preventDefault();
   };
 
+  // CREATE DELETE ITEM COMPONENT
+
   render() {
     return (
       <div className="App">
@@ -29,7 +32,7 @@ class App extends Component {
             onChange={this.onChange}
             placeholder="type here"
           />
-          <button>add</button>
+          <Button color="danger">add</Button>
         </form>
         <List items={this.state.items} />
       </div>
