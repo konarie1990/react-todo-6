@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import List from "./List";
-import { Button } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import "./App.css";
 
 class App extends Component {
   state = {
     text: "",
+    key: "",
     items: []
   };
 
@@ -16,25 +17,35 @@ class App extends Component {
   onSubmit = e => {
     this.setState({
       text: "",
+      key: Date.now(),
       items: [...this.state.items, this.state.text]
     });
     e.preventDefault();
   };
 
-  // CREATE DELETE ITEM COMPONENT
+  deleteItem = key => {
+    const filteredItems = this.state.items.filter(item => item.key !== key);
 
+    this.setState({
+      items: filteredItems
+    });
+  };
   render() {
+    console.log(this.state.key);
     return (
       <div className="App">
         <form className="App" onSubmit={this.onSubmit}>
-          <input
+          <Input
+            type="text"
             value={this.state.text}
             onChange={this.onChange}
             placeholder="type here"
           />
-          <Button color="danger">add</Button>
+          <Button color="danger" block>
+            add
+          </Button>
         </form>
-        <List items={this.state.items} />
+        <List delete={this.deleteItem} items={this.state.items} />
       </div>
     );
   }

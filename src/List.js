@@ -2,23 +2,21 @@ import React, { Component } from "react";
 import "./List.css";
 
 class List extends Component {
-  delete = key => this.state.delete(key);
+  // delete <li> from <ul>
+  delete = key => this.props.delete(key);
 
-  List = props => {
+  createTasks = item => {
     return (
-      <ul>
-        {props.items.map((item, index) => (
-          <li onClick={() => this.delete(item.key)} key={index}>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <li onClick={() => this.delete(item.key)} key={item.key}>
+        {item}
+      </li>
     );
   };
+
   render() {
-    const todoEntries = this.props.entries;
+    const todoEntries = this.props.items;
     const listItems = todoEntries.map(this.createTasks);
-    return <ul className="theList">{listItems}</ul>;
+    return <ul>{listItems}</ul>;
   }
 }
 
